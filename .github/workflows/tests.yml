@@ -31,15 +31,21 @@ jobs:
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
-      - name: Install GeckoDriver
-        uses: nanasess/setup-chromedriver@v1
-        with:
-          geckodriver: 'latest'
-
       - name: Install Firefox and GeckoDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox 
+          sudo apt-get install -y firefox wget tar curl
+
+          GECKO_VERSION="v0.34.0"
+          echo "Installing geckodriver version $GECKO_VERSION"
+          
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKO_VERSION/geckodriver-$GECKO_VERSION-linux64.tar.gz
+          tar -xvzf geckodriver-$GECKO_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/geckodriver
+          rm geckodriver-$GECKO_VERSION-linux64.tar.gz
+          
+          geckodriver --version
           firefox --version
 
       - name: Run tests with pytest
