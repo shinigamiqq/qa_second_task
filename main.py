@@ -21,7 +21,7 @@ def parse_contacts(output_file: str):
 
     options = Options()
     options.add_argument("--headless")
-    options.binary_location = "/usr/bin/firefox"
+    #options.binary_location = "/usr/bin/firefox"
 
     driver = webdriver.Firefox(options=options)
     wait = WebDriverWait(driver, 10)
