@@ -31,24 +31,7 @@ jobs:
       - name: Install Firefox and GeckoDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox wget tar
-          
-          echo "Downloading latest geckodriver..."
-          GECKO_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep "tag_name" | cut -d '"' -f4)
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKO_VERSION/geckodriver-$GECKO_VERSION-linux64.tar.gz
-          
-          echo "Extracting geckodriver..."
-          tar -xvzf geckodriver-$GECKO_VERSION-linux64.tar.gz
-          
-          echo "Moving geckodriver to /usr/local/bin..."
-          sudo mv geckodriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/geckodriver
-          
-          echo "Firefox version:"
-          firefox --version
-          
-          echo "Geckodriver version:"
-          geckodriver --version
+          sudo apt-get install -y firefox geckodriver
 
       - name: Run tests with pytest
         run: |
