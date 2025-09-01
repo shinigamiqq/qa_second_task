@@ -34,7 +34,7 @@ jobs:
       - name: Install Firefox and GeckoDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y firefox wget tar curl
+          sudo apt-get install -y firefox-esr wget tar curl
 
           GECKO_VERSION="v0.34.0"
           echo "Installing geckodriver version $GECKO_VERSION"
